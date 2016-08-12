@@ -2,7 +2,9 @@ import io from 'socket.io-client';
 
 class Socket {
 	static connect () {
-		return io.connect('http://localhost:8888');
+		var socketHost = window.location.protocol + '//' + window.location.hostname + ':8888';
+
+		return io.connect(socketHost);
 	}
 }
 
