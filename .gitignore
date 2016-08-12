@@ -1,0 +1,13 @@
+node_modules/
+src/client/public/
+cache/
+logs/
+mock/
+uploads/
+bower_components/
+
+
+*.log
+*.sublime-project
+*.sublime-workspace
+*.vscode

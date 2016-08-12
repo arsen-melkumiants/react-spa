@@ -1,0 +1,152 @@
+@import '~variables.less';
+
+.form {
+	position: relative;
+
+	&-btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		background-color: @color-main;
+		color: @color-bg;
+		border: 0;
+		border-radius: 50%;
+		cursor: pointer;
+
+		transition: background-color .15s ease-in;
+
+		&:hover {
+			background-color: lighten(@color-main, 10%);
+		}
+		&-send {
+			padding: 2px 0 0 4px;
+		}
+		&-profile {
+			background-color: @color-highlight;
+
+			&:hover {
+				background-color: lighten(@color-highlight, 10%);
+			}
+		}
+		&-disabled,
+		&-disabled:hover {
+			background-color: @color-message-bg;
+		}
+	}
+	&-text {
+		margin-right: 55px;
+		padding: 10px 0 10px 10px;
+		overflow: hidden;
+		background: @color-message-bg;
+		border-radius: @border-radius;
+
+		textarea,
+		input {
+			display: block;
+			color: @color-message-text;
+			width: 100%;
+			border: 0;
+			background: transparent;
+			padding: 0 10px 0 0;
+		}
+		input {
+			height: 20px;
+		}
+		textarea {
+			height: 35px;
+			resize: none;
+		}
+		&-inner {
+		    margin-right: -20px;
+		}
+
+	}
+	&-label {
+		display: block;
+		padding: 10px 0;
+	}
+	&-range {
+		margin-bottom: 20px;
+
+		input {
+			-webkit-appearance: none;
+			width: 100%;
+			cursor: pointer;
+
+			&:focus {
+				outline: none;
+
+				&::-webkit-slider-runnable-track {
+					outline: none;
+					background: @color-message-bg;
+				}
+				&::-moz-range-track {
+					background: @color-message-bg;
+				}
+				&::-ms-fill-lower {
+					background: @color-message-bg;
+				}
+				&::-ms-fill-upper {
+					background: @color-message-bg;
+				}
+			}
+			&::-webkit-slider-runnable-track {
+				height: 3px;
+				margin: 5px 0;
+				background: @color-message-bg;
+				border: none;
+			}
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				border: none;
+				height: 14px;
+				width: 14px;
+				border-radius: 50%;
+				background-color: @color-main;
+				transform-origin: 50% 50%;
+				margin: -5px 0 0 0;
+			}
+			&::-moz-range-track {
+				height: 3px;
+				margin: 5px 0;
+				background: @color-message-bg;
+				border: none;
+			}
+			&::-moz-range-thumb {
+				border: none;
+				height: 14px;
+				width: 14px;
+				border-radius: 50%;
+				background: @color-main;
+				margin-top: -5px;
+			}
+			&:-moz-focusring {
+				outline: none;
+			}
+			&::-ms-track {
+				height: 3px;
+				margin: 5px 0;
+				background: transparent;
+				border-color: transparent;
+				border-width: 6px 0;
+				color: transparent;
+			}
+			&::-ms-fill-lower {
+				background: @color-message-bg;
+			}
+			&::-ms-fill-upper {
+				background: @color-message-bg;
+			}
+			&::-ms-thumb {
+				border: none;
+				height: 14px;
+				width: 14px;
+				border-radius: 50%;
+				background: @color-main;
+			}
+		}
+	}
+}

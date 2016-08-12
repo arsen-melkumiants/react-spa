@@ -1,0 +1,36 @@
+@import (css) '~normalize.css';
+@import (css) '~material-design-icons-iconfont/dist/material-design-icons.css';
+@import '~variables.less';
+
+html, body {
+	font-family: "Helvetica Neue", Helvetica, Arial, Verdana, Tahoma;
+	font-size: 14px;
+	color: @color-text;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+input,
+textarea,
+button {
+	outline: none;
+}
+
+.container {
+	max-width: 500px;
+	margin: 0 auto;
+}
+.content {
+	padding-bottom: 25px;
+}
+.block {
+	margin-bottom: 20px;
+	border-radius: 0;
+	background-color: @color-bg;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.16),0 0 2px 0 rgba(0,0,0,.12);
+}
