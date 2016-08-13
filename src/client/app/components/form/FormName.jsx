@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import 'form/less/form.less';
@@ -15,10 +14,6 @@ class FormName extends React.Component {
 
 	componentWillMount () {
 		this.state.name = this.props.name || '';
-	}
-
-	componentDidMount () {
-		ReactDOM.findDOMNode(this.refs.input).focus();
 	}
 
 	onNameChange (e) {
