@@ -21,6 +21,7 @@ var config = {
 			exclude: [/\/node_modules\//, /\\app\/less\\/],
 			query: {
 				presets: ['react', 'es2015'],
+				plugins: ['transform-runtime'],
 				cacheDirectory: true
 			}
 		}, {
