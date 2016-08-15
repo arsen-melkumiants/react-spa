@@ -14,6 +14,7 @@ The application consists of 3 parts:
   * Has his own server for WebSocket connections
   * Advanced (PM2) process manager for server side
   * Ultra light client JS file + CSS
+  * Customizable (variables.less)
   * Material design icons
   * Code based on ES6
 
