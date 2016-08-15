@@ -5,11 +5,15 @@ import classNames from 'classnames';
 import 'form/less/form.less';
 
 class FormRange extends React.Component {
-	constructor () {
+	constructor (props) {
 		super();
 		this.state = {
-			value: ''
+			value: props.value
 		};
+	}
+
+	componentDidMount () {
+		this.forceUpdate();
 	}
 
 	onRangeChange (e) {
@@ -27,9 +31,10 @@ class FormRange extends React.Component {
 					<input
 						type="range"
 						placeholder="Enter your name"
-						value={ this.props.value }
+						value={ this.state.value }
 						max={ this.props.max }
 						min={ this.props.min }
+						onMouseUp={ this.onRangeChange.bind(this) }
 						onChange={ this.onRangeChange.bind(this) }
 					/>
 				</div>

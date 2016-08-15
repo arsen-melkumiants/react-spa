@@ -4,20 +4,13 @@ import classNames from 'classnames';
 import PreLoaderSpinner from 'preloader/PreLoaderSpinner';
 
 class GalleryItem extends React.Component {
-	constructor () {
+	constructor (props) {
 		super();
 		this.state = {
-			image: {},
-			active: false,
+			image: Object.assign({}, props.image),
+			active: props.active,
 			loaded: false
 		};
-	}
-
-	componentWillMount () {
-		this.setState({
-			image: Object.assign({}, this.props.image),
-			active: this.props.active
-		});
 	}
 
 	componentWillReceiveProps (nextProps) {

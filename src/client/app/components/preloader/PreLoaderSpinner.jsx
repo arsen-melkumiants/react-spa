@@ -10,16 +10,19 @@ class PreLoaderSpinner extends React.Component {
 		if (this.props.show) {
 			return (
 				<div className="preloader-spinner">
-					<svg className="preloader-spinner-svg" width={65} height={65} viewBox="0 0 66 66">
-						<circle
-							className="preloader-spinner-circle"
-							cx={33}
-							cy={33}
-							r={30}
-							strokeWidth={5}
-							strokeLinecap="round"
-						/>
-					</svg>
+					<div className="preloader-spinner-container">
+						<div className="preloader-spinner-layer">
+							<div className="preloader-spinner-clipper preloader-spinner-clipper-left">
+								<div className="preloader-spinner-circle preloader-spinner-circle-left"/>
+							</div>
+							<div className="preloader-spinner-gap">
+								<div className="preloader-spinner-circle preloader-spinner-circle-gap"/>
+							</div>
+							<div className="preloader-spinner-clipper preloader-spinner-clipper-right">
+								<div className="preloader-spinner-circle preloader-spinner-circle-right"/>
+							</div>
+						</div>
+					</div>
 				</div>
 			);
 		}

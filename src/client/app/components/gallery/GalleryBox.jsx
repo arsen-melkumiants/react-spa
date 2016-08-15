@@ -21,7 +21,7 @@ class GalleryBox extends React.Component {
 		return 'http://lorempixel.com/' + this.state.width + '/' + this.state.height + '/?t=' + Date.now();
 	}
 
-	componentWillMount () {
+	componentDidMount () {
 		this.loadImage();
 	}
 

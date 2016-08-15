@@ -12,8 +12,8 @@ class NavBox extends React.Component {
 			count: 0
 		};
 
-		socket.on('new_message', () => {
-			if (window.location.pathname !== '/') {
+		socket.on('new_message', message => {
+			if (window.location.pathname !== '/' && message.type === 'MESSAGE') {
 				this.setState({ count: this.state.count + 1 });
 			}
 		});
