@@ -1,6 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import './less/main.less';
 
@@ -13,18 +19,22 @@ import NotFound from 'not_found/NotFound';
 class App extends React.Component {
 	render () {
 		return (
-			<Router history={ browserHistory }>
-				<Route path="/" component={ NavBox }>
-					<IndexRoute component={ ChatBox }/>
-					<Route path="/chat" component={ ChatBox }/>
-					<Route path="/gallery" component={ GalleryBox }/>
-					<Route path="/settings" component={ SettingsBox }/>
-					<Route path="*" component={ NotFound }/>
-				</Route>
+			<Router>
+				<div>
+					<NavBox />
+
+					<Switch>
+						<Route exact path="/" component={ ChatBox }/>
+						<Route path="/chat" component={ ChatBox }/>
+						<Route path="/gallery" component={ GalleryBox }/>
+						<Route path="/settings" component={ SettingsBox }/>
+
+						<Route component={ NotFound }/>
+					</Switch>
+				</div>
 			</Router>
 		);
 	}
-
 }
 
 render(<App/>, document.getElementById('content'));

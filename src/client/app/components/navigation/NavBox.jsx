@@ -42,7 +42,7 @@ class NavBox extends React.Component {
 						</h2>
 					</div>
 					<ul className="nav-list block" role="nav">
-						<li className="nav-list-item"><NavItem to="/" isIndexLink={true}>Chat { this.counter }</NavItem></li>
+						<li className="nav-list-item"><NavItem to="/" exact>Chat { this.counter }</NavItem></li>
 						<li className="nav-list-item"><NavItem to="/gallery">Gallery</NavItem></li>
 						<li className="nav-list-item"><NavItem to="/settings">Settings</NavItem></li>
 					</ul>

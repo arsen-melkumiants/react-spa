@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router'
+import { NavLink } from 'react-router-dom';
 
 class NavItem extends React.Component {
 	render () {
@@ -7,9 +7,9 @@ class NavItem extends React.Component {
   		delete linkProps.isIndexLink;
 
 		if (this.props.isIndexLink) {
-			return (<IndexLink {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
+			return (<NavLink {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
 		} else {
-			return (<Link {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
+			return (<NavLink {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
 		}
 	}
 }
