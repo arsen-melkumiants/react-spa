@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "./node_modules/pm2/bin/pm2 start process.json",
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
     "stop": "./node_modules/pm2/bin/pm2 kill"
   },
   "dependencies": {
