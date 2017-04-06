@@ -21,16 +21,16 @@ class App extends React.Component {
 		return (
 			<Router>
 				<div>
-					<NavBox />
+					<NavBox>
+						<Switch>
+							<Route exact path="/" component={ ChatBox }/>
+							<Route path="/chat" component={ ChatBox }/>
+							<Route path="/gallery" component={ GalleryBox }/>
+							<Route path="/settings" component={ SettingsBox }/>
 
-					<Switch>
-						<Route exact path="/" component={ ChatBox }/>
-						<Route path="/chat" component={ ChatBox }/>
-						<Route path="/gallery" component={ GalleryBox }/>
-						<Route path="/settings" component={ SettingsBox }/>
-
-						<Route component={ NotFound }/>
-					</Switch>
+							<Route component={ NotFound }/>
+						</Switch>
+					</NavBox>
 				</div>
 			</Router>
 		);
