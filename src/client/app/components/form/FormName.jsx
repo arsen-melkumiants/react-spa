@@ -17,10 +17,10 @@ class FormName extends React.Component {
 	}
 
 	onNameChange (e) {
-		var name = e.target.value.trim();
+		var newName = e.target.value.trim();
 		this.setState({
-			name: name,
-			btnStatus: name
+			name: newName,
+			btnStatus: Boolean(newName)
 		});
 	}
 
@@ -35,7 +35,7 @@ class FormName extends React.Component {
 		this.setState({
 			name: name,
 			btnStatus: false
-		})
+		});
 	}
 
 	get btnClass () {
