@@ -1,20 +1,20 @@
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-var NODE_ENV = process.env.NODE_ENV || 'development';
-var BUILD_DIR = path.resolve(__dirname, 'src/client/public');
-var APP_DIR = path.resolve(__dirname, 'src/client/app');
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const BUILD_DIR = path.resolve(__dirname, 'src/client/public');
+const APP_DIR = path.resolve(__dirname, 'src/client/app');
 
-var postcssLoader = {
+let postcssLoader = {
 	loader: 'postcss-loader',
 	options: {
 		plugins: () => [require('autoprefixer')]
 	}
 };
 
-var lessLoader = {
+let lessLoader = {
 	loader: 'less-loader',
 	options: {
 		paths: [
@@ -24,7 +24,7 @@ var lessLoader = {
 	}
 };
 
-var babelLoader = {
+let babelLoader = {
 	loader: 'babel-loader',
 	options: {
 		presets: ['react', 'es2015'],
@@ -33,14 +33,14 @@ var babelLoader = {
 	}
 };
 
-var fileLoader = {
+let fileLoader = {
 	loader: 'file-loader',
 	options: {
 		name: 'assets/[name].[hash:8].[ext]',
 	}
 };
 
-var config = {
+let config = {
 	entry: APP_DIR + '/index.jsx',
 	output: {
 		path: BUILD_DIR,
@@ -100,7 +100,7 @@ var config = {
 			'react': 'react/dist/react-with-addons.min.js',
 			'react-dom': 'react-dom/dist/react-dom.min.js',
 			'react-router-dom': 'react-router-dom/umd/react-router-dom.min.js',
-			'socket.io-client': 'socket.io-client/dist/socket.io.min.js',
+			'socket.io-client': 'socket.io-client/dist/socket.io.js',
 			'marked': 'marked/marked.min.js'
 		}
 	},
