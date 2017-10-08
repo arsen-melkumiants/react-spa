@@ -1,41 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import GalleryItem from 'gallery/GalleryItem';
 
-class GalleryList extends React.Component {
 
-	getStatus (image) {
-		return image.id === this.props.active;
-	}
+function GalleryList({ images, active }) {
+	const calculateOffset = () => {
+		return -(active - 1) * 100;
+	};
 
-	calculateOffset () {
-		return -(this.props.active - 1) * 100;
-	}
+	const getTransformStyle = () => {
+		return `translate3d(${calculateOffset()}%, 0px, 0px)`;
+	};
 
-	get transformStyle () {
-		return 'translate3d(' + this.calculateOffset() + '%, 0px, 0px)';
-	}
+	const getStatus = (image) => {
+		return image.id === active;
+	};
 
-	get galleryList () {
-		return this.props.images.map(image => {
-			return (
-				<GalleryItem image={ image } active={ this.getStatus(image) } key={ image.id }/>
-			);
-		});
-	}
-
-	render () {
-		return (
-			<div className="gallery-list" style={{ transform: this.transformStyle }}>
-				{ this.galleryList }
-			</div>
-		);
-	}
+	return (
+		<div className="gallery-list" style={{ transform: getTransformStyle() }}>
+			{ images.map(image => (
+				<GalleryItem image={image} active={getStatus(image)} key={image.id} />
+			))}
+		</div>
+	);
 }
 
 GalleryList.propTypes = {
-	images: React.PropTypes.array.isRequired,
-	active: React.PropTypes.number.isRequired
+	active: PropTypes.number.isRequired,
+	images: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.number.isRequired,
+		src: PropTypes.string.isRequired
+	})).isRequired
 };
 
 export default GalleryList;

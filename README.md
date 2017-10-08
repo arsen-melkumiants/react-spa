@@ -41,8 +41,7 @@ http://localhost:3000/
 ## Development Stage
 Before making changes in files run command (watching file changes):
 ```bash
-sudo npm i -g webpack
-webpack -w
+npm run watch
 ```
 
 ## License

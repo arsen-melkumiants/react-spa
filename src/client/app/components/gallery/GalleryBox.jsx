@@ -7,7 +7,7 @@ import GalleryList from 'gallery/GalleryList';
 import GalleryNav from 'gallery/GalleryNav';
 
 class GalleryBox extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
 			width: storage.get('width'),
@@ -15,31 +15,16 @@ class GalleryBox extends React.Component {
 			images: [],
 			active: 0
 		};
+
+		this.onChangeImage = this.onChangeImage.bind(this);
 	}
 
-	get imageURL () {
-		return 'http://lorempixel.com/' + this.state.width + '/' + this.state.height + '/?t=' + Date.now();
-	}
-
-	componentDidMount () {
+	componentDidMount() {
 		this.loadImage();
 	}
 
-	loadImage () {
-		var images = this.state.images.concat([{
-			id: this.state.active + 1,
-			src: this.imageURL
-		}]);
-
-		this.setState({
-			images: images,
-			active: this.state.active + 1
-		});
-	}
-
-	onChangeImage (type) {
-		var active = this.state.active;
-		var images = this.state.images;
+	onChangeImage(type) {
+		let { active, images } = this.state;
 
 		if (type === 'NEXT' && active < images.length) {
 			this.setState({ active: active + 1 });
@@ -50,14 +35,29 @@ class GalleryBox extends React.Component {
 		}
 	}
 
+	get imageURL() {
+		return `http://lorempixel.com/${this.state.width}/${this.state.height}/?t=${Date.now()}`;
+	}
 
-	render () {
+	loadImage() {
+		let images = this.state.images.concat([{
+			id: this.state.active + 1,
+			src: this.imageURL
+		}]);
+
+		this.setState({
+			images,
+			active: this.state.active + 1
+		});
+	}
+
+	render() {
 		return (
 			<div className="gallery-box block" style={{ maxWidth: this.state.width }}>
-				<GalleryNav onChangeImage={ this.onChangeImage.bind(this) } />
+				<GalleryNav onChangeImage={this.onChangeImage} />
 				<GalleryList
-					images={ this.state.images }
-					active={ this.state.active }
+					images={this.state.images}
+					active={this.state.active}
 				/>
 			</div>
 		);

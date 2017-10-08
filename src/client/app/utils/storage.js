@@ -1,5 +1,5 @@
 class Storage {
-	constructor () {
+	constructor() {
 		this.storage = {
 			width: 500,
 			height: 300
@@ -14,11 +14,9 @@ class Storage {
 		this.storage[key] = value;
 	}
 
-	get (key) {
+	get(key) {
 		return this.storage[key];
 	}
 }
 
-var storage = new Storage();
-
-export default storage;
+export default new Storage();

@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import storage from 'storage';
 
 import FormName from 'form/FormName';
@@ -7,36 +7,37 @@ import FormText from 'form/FormText';
 
 
 class ChatForm extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
-			name: storage.get('name'),
-			text: ''
+			name: storage.get('name')
 		};
+
+		this.onNameSubmit = this.onNameSubmit.bind(this);
+		this.onMessageSubmit = this.onMessageSubmit.bind(this);
 	}
 
-	onNameSubmit (name) {
-		this.setState({ name: name });
+	onNameSubmit(name) {
+		this.setState({ name });
 		storage.set('name', name);
 	}
 
-	onMessageSubmit (text) {
-		this.setState({ text: '' });
+	onMessageSubmit(text) {
 		this.props.onMessageSubmit({
 			name: this.state.name,
-			text: text
+			text
 		});
 	}
 
-	get inputElements () {
+	get inputElements() {
 		if (this.state.name) {
-			return (<FormText onMessageSubmit={ this.onMessageSubmit.bind(this) }/>)
-		} else {
-			return (<FormName onNameSubmit={ this.onNameSubmit.bind(this) }/>);
+			return (<FormText onMessageSubmit={this.onMessageSubmit} />);
 		}
+
+		return (<FormName onNameSubmit={this.onNameSubmit} />);
 	}
 
-	render () {
+	render() {
 		return (
 			<div className="chat-form">
 				{ this.inputElements }
@@ -46,7 +47,7 @@ class ChatForm extends React.Component {
 }
 
 ChatForm.propTypes = {
-	onMessageSubmit: React.PropTypes.func.isRequired
+	onMessageSubmit: PropTypes.func.isRequired
 };
 
 export default ChatForm;

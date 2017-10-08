@@ -1,37 +1,43 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import socket from 'socket';
 
 import 'navigation/less/navigation.less';
 
 import NavItem from 'navigation/NavItem';
 
+
 class NavBox extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
 			count: 0
 		};
 
-		socket.on('new_message', message => {
-			if (window.location.pathname !== '/' && message.type === 'MESSAGE') {
+		socket.on('new_message', (message) => {
+			if (!this.isChatPage && message.type === 'MESSAGE') {
 				this.setState({ count: this.state.count + 1 });
 			}
 		});
 	}
 
-	componentWillReceiveProps () {
-		if (window.location.pathname === '/' && this.state.count) {
-			this.setState({ count: 0 });
-		}
+	get isChatPage() {
+		return window.location.pathname === '/';
 	}
 
-	get counter () {
+	get counter() {
+		if (this.isChatPage && this.state.count) {
+			this.state.count = 0;
+		}
+
 		if (this.state.count) {
 			return (<div className="nav-list-counter">{ this.state.count }</div>);
 		}
+
+		return null;
 	}
 
-	render () {
+	render() {
 		return (
 			<div>
 				<div className="nav-box">
@@ -41,10 +47,10 @@ class NavBox extends React.Component {
 							<span className="nav-title-short">Example of SPA</span>
 						</h2>
 					</div>
-					<ul className="nav-list block" role="nav">
-						<li className="nav-list-item"><NavItem to="/" exact>Chat { this.counter }</NavItem></li>
-						<li className="nav-list-item"><NavItem to="/gallery">Gallery</NavItem></li>
-						<li className="nav-list-item"><NavItem to="/settings">Settings</NavItem></li>
+					<ul className="nav-list block">
+						<NavItem to="/" exact>Chat {this.counter}</NavItem>
+						<NavItem to="/gallery">Gallery</NavItem>
+						<NavItem to="/settings">Settings</NavItem>
 					</ul>
 				</div>
 				<div className="content container">
@@ -56,7 +62,11 @@ class NavBox extends React.Component {
 }
 
 NavBox.propTypes = {
-	children: React.PropTypes.element
+	children: PropTypes.node
+};
+
+NavBox.defaultProps = {
+	children: ''
 };
 
 export default NavBox;

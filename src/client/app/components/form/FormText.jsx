@@ -1,38 +1,43 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import 'form/less/form.less';
 
 class FormText extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
 			text: '',
 			btnStatus: false
 		};
+
+		this.onKeyDown = this.onKeyDown.bind(this);
+		this.onMessageSubmit = this.onMessageSubmit.bind(this);
+		this.onMessageChange = this.onMessageChange.bind(this);
 	}
 
-	componentDidMount () {
-		ReactDOM.findDOMNode(this.refs.input).focus();
+	componentDidMount() {
+		this.textareaNode.focus();
 	}
 
-	onKeyDown (e) {
+	onKeyDown(e) {
 		if (e.ctrlKey && (e.keyCode === 10 || e.keyCode === 13)) {
 			this.onMessageSubmit(e);
 		}
 	}
 
-	onMessageChange (e) {
+	onMessageChange(e) {
 		this.setState({
-			text: e.target.value, //do not trim onChange because user can use line breaks
+			// NOTE: Do not trim on text because user can use line breaks
+			text: e.target.value,
 			btnStatus: e.target.value.trim()
 		});
 	}
 
-	onMessageSubmit (e) {
+	onMessageSubmit(e) {
 		e.preventDefault();
-		var text = this.state.text.trim();
+		let text = this.state.text.trim();
 		if (!text) {
 			return;
 		}
@@ -44,7 +49,7 @@ class FormText extends React.Component {
 		});
 	}
 
-	get btnClass () {
+	get btnClass() {
 		return classNames({
 			'form-btn': true,
 			'form-btn-send': true,
@@ -52,21 +57,21 @@ class FormText extends React.Component {
 		});
 	}
 
-	render () {
+	render() {
 		return (
-			<form className="form" onSubmit={ this.onMessageSubmit.bind(this) }>
+			<form className="form" onSubmit={this.onMessageSubmit}>
 				<div className="form-text">
 					<div className="form-text-inner">
 						<textarea
-							ref="input"
-							value={ this.state.text }
+							ref={node => this.textareaNode = node}
+							value={this.state.text}
 							placeholder="Say something..."
-							onKeyDown={ this.onKeyDown.bind(this) }
-							onChange={ this.onMessageChange.bind(this) }
+							onKeyDown={this.onKeyDown}
+							onChange={this.onMessageChange}
 						/>
 					</div>
 				</div>
-				<button className={ this.btnClass }>
+				<button className={this.btnClass}>
 					<i className="material-icons">&#xE163;</i>
 				</button>
 			</form>
@@ -75,7 +80,7 @@ class FormText extends React.Component {
 }
 
 FormText.propTypes = {
-	onMessageSubmit: React.PropTypes.func.isRequired
+	onMessageSubmit: PropTypes.func.isRequired
 };
 
 export default FormText;

@@ -1,44 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import 'form/less/form.less';
 
 class FormName extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
 			name: '',
 			btnStatus: false
 		};
+
+		this.onNameChange = this.onNameChange.bind(this);
+		this.onNameSubmit = this.onNameSubmit.bind(this);
 	}
 
-	componentWillMount () {
+	componentWillMount() {
 		this.state.name = this.props.name || '';
 	}
 
-	onNameChange (e) {
-		var newName = e.target.value.trim();
+	onNameChange(e) {
+		let newName = e.target.value.trim();
 		this.setState({
 			name: newName,
 			btnStatus: Boolean(newName)
 		});
 	}
 
-	onNameSubmit (e) {
+	onNameSubmit(e) {
 		e.preventDefault();
-		var name = this.state.name;
+		let { name } = this.state;
+
 		if (!name || !this.state.btnStatus) {
 			return;
 		}
 
 		this.props.onNameSubmit(name);
 		this.setState({
-			name: name,
+			name,
 			btnStatus: false
 		});
 	}
 
-	get btnClass () {
+	get btnClass() {
 		return classNames({
 			'form-btn': true,
 			'form-btn-profile': true,
@@ -46,19 +51,18 @@ class FormName extends React.Component {
 		});
 	}
 
-	render () {
+	render() {
 		return (
-			<form className="form" onSubmit={ this.onNameSubmit.bind(this) }>
+			<form className="form" onSubmit={this.onNameSubmit}>
 				<div className="form-text">
 					<input
 						type="text"
-						ref="input"
 						placeholder="Enter your name"
-						value={ this.state.name }
-						onChange={ this.onNameChange.bind(this) }
+						value={this.state.name}
+						onChange={this.onNameChange}
 					/>
 				</div>
-				<button className={ this.btnClass }>
+				<button className={this.btnClass}>
 					<i className="material-icons">&#xE7FD;</i>
 				</button>
 			</form>
@@ -67,8 +71,12 @@ class FormName extends React.Component {
 }
 
 FormName.propTypes = {
-	onNameSubmit: React.PropTypes.func.isRequired,
-	name: React.PropTypes.string
+	onNameSubmit: PropTypes.func.isRequired,
+	name: PropTypes.string
+};
+
+FormName.defaultProps = {
+	name: ''
 };
 
 export default FormName;

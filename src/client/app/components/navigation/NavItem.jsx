@@ -1,22 +1,31 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-class NavItem extends React.Component {
-	render () {
-		var linkProps = Object.assign({}, this.props);
-  		delete linkProps.isIndexLink;
-
-		if (this.props.isIndexLink) {
-			return (<NavLink {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
-		} else {
-			return (<NavLink {...linkProps} className="nav-list-link" activeClassName="nav-list-link-active" />);
-		}
-	}
+function NavItem({ to, exact, children }) {
+	return (
+		<li className="nav-list-item">
+			<NavLink
+				exact={exact}
+				to={to}
+				className="nav-list-link"
+				activeClassName="nav-list-link-active"
+			>
+				{ children }
+			</NavLink>
+		</li>
+	);
 }
 
 NavItem.propTypes = {
-	to: React.PropTypes.string.isRequired,
-	isIndexLink: React.PropTypes.bool
+	to: PropTypes.string.isRequired,
+	exact: PropTypes.bool,
+	children: PropTypes.node
+};
+
+NavItem.defaultProps = {
+	exact: false,
+	children: ''
 };
 
 export default NavItem;

@@ -3,14 +3,15 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const IS_PROD = process.env.NODE_ENV === 'production';
 const BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 const APP_DIR = path.resolve(__dirname, 'src/client/app');
+const HASH_LENGTH = 8;
 
 let postcssLoader = {
 	loader: 'postcss-loader',
 	options: {
-		plugins: () => [require('autoprefixer')]
+		plugins: () => [autoprefixer]
 	}
 };
 
@@ -36,16 +37,18 @@ let babelLoader = {
 let fileLoader = {
 	loader: 'file-loader',
 	options: {
-		name: 'assets/[name].[hash:8].[ext]',
+		name: 'assets/[name].[ext]'
 	}
 };
 
 let config = {
-	entry: APP_DIR + '/index.jsx',
+	entry: {
+		app: path.resolve(APP_DIR, 'index.jsx')
+	},
 	output: {
 		path: BUILD_DIR,
 		publicPath: '/',
-		filename: 'js/main.[hash:8].js'
+		filename: 'js/[name].js'
 	},
 	module: {
 		rules: [{
@@ -75,10 +78,10 @@ let config = {
 				postcssLoader,
 				lessLoader
 			]
-		}],
+		}]
 
-		//Avoid parsing pre-build scripts
-		noParse: [/react-with-addons/, /socket.io/, /marked/]
+		// Avoid parsing pre-build scripts
+		// noParse: []
 	},
 	devtool: 'source-map',
 	plugins: [
@@ -95,18 +98,18 @@ let config = {
 		],
 		extensions: ['.js', '.jsx'],
 
-		//Using pre-build libs to make build process faster
+		// Using pre-build libs to make build process faster
 		alias: {
-			'react': 'react/dist/react-with-addons.min.js',
-			'react-dom': 'react-dom/dist/react-dom.min.js',
+			react: 'react/umd/react.production.min.js',
+			'prop-types': 'prop-types/prop-types.min.js',
+			'react-dom': 'react-dom/umd/react-dom.production.min.js',
 			'react-router-dom': 'react-router-dom/umd/react-router-dom.min.js',
-			'socket.io-client': 'socket.io-client/dist/socket.io.js',
-			'marked': 'marked/marked.min.js'
+			'socket.io-client': 'socket.io-client/dist/socket.io.js'
 		}
-	},
+	}
 };
 
-if (NODE_ENV === 'production') {
+if (IS_PROD) {
 	config.plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false
@@ -116,6 +119,19 @@ if (NODE_ENV === 'production') {
 		}
 	}));
 	config.devtool = false;
+
+	config.output.filename = `js/[name].[chunkhash:${HASH_LENGTH}].js`;
+	fileLoader.options.name = `assets/[name].[hash:${HASH_LENGTH}].[ext]`;
+} else {
+	config.module.rules.push({
+		enforce: 'pre',
+		test: /\.js.?$/,
+		exclude: /node_modules/,
+		loader: 'eslint-loader',
+		options: {
+			fix: true
+		}
+	});
 }
 
 module.exports = config;

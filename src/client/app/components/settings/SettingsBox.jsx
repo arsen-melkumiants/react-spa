@@ -9,7 +9,7 @@ import FormName from 'form/FormName';
 import FormRange from 'form/FormRange';
 
 class SettingsBox extends React.Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
 			width: storage.get('width'),
@@ -17,9 +17,14 @@ class SettingsBox extends React.Component {
 			name: storage.get('name'),
 			selectedItem: 'PHOTO'
 		};
+
+		this.onAccordionSelect = this.onAccordionSelect.bind(this);
+		this.onWidthChange = this.onWidthChange.bind(this);
+		this.onHeightChange = this.onHeightChange.bind(this);
+		this.onNameSubmit = this.onNameSubmit.bind(this);
 	}
 
-	onNameSubmit (name) {
+	onNameSubmit(name) {
 		if (this.state.name) {
 			socket.emit('change_name', {
 				oldName: this.state.name,
@@ -28,26 +33,26 @@ class SettingsBox extends React.Component {
 		}
 
 		storage.set('name', name);
-		this.setState({ name: name });
+		this.setState({ name });
 	}
 
-	onWidthChange (value) {
+	onWidthChange(value) {
 		storage.set('width', value);
 		this.setState({ width: value });
 	}
 
-	onHeightChange (value) {
+	onHeightChange(value) {
 		storage.set('height', value);
 		this.setState({ height: value });
 	}
 
-	onAccordionSelect (item) {
+	onAccordionSelect(item) {
 		this.setState({
 			selectedItem: item === this.state.selectedItem ? '' : item
 		});
 	}
 
-	getItemClass (item) {
+	getItemClass(item) {
 		return classNames({
 			'settings-item': true,
 			'settings-item-active': item === this.state.selectedItem
@@ -57,35 +62,51 @@ class SettingsBox extends React.Component {
 	render() {
 		return (
 			<div className="settings-box">
-				<div className={ this.getItemClass('PHOTO') }>
-					<div className="settings-title" onClick={ this.onAccordionSelect.bind(this, 'PHOTO') }>
+				<div className={this.getItemClass('PHOTO')}>
+					<div
+						tabIndex={0}
+						role="button"
+						className="settings-title"
+						onClick={() => this.onAccordionSelect('PHOTO')}
+						onKeyDown={() => this.onAccordionSelect('PHOTO')}
+					>
 						<i className="material-icons">&#xE315;</i>
 						Photo settings
 					</div>
 					<div className="settings-body settings-body-photo">
 						<FormRange
-							min={250} max={500} value={ this.state.width }
-							label={'Width: ' + this.state.width + 'px'}
-							onRangeChange={ this.onWidthChange.bind(this) }
+							min={250}
+							max={500}
+							value={this.state.width}
+							label={`Width: ${this.state.width}px`}
+							onRangeChange={value => this.onWidthChange(value)}
 						/>
 						<FormRange
-							min={100} max={500} value={ this.state.height }
-							label={'Height: ' + this.state.height + 'px'}
-							onRangeChange={ this.onHeightChange.bind(this) }
+							min={100}
+							max={500}
+							value={this.state.height}
+							label={`Height: ${this.state.height}px`}
+							onRangeChange={value => this.onHeightChange(value)}
 						/>
 					</div>
 				</div>
-				<div className={ this.getItemClass('CHAT') }>
-					<div className="settings-title" onClick={ this.onAccordionSelect.bind(this, 'CHAT') }>
+				<div className={this.getItemClass('CHAT')}>
+					<div
+						tabIndex={0}
+						role="button"
+						className="settings-title"
+						onClick={() => this.onAccordionSelect('CHAT')}
+						onKeyDown={() => this.onAccordionSelect('CHAT')}
+					>
 						<i className="material-icons">&#xE315;</i>
 						Chat settings
 					</div>
 					<div className="settings-body settings-body-chat">
-						<FormName name={ this.state.name } onNameSubmit={ this.onNameSubmit.bind(this) }/>
+						<FormName name={this.state.name} onNameSubmit={this.onNameSubmit} />
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

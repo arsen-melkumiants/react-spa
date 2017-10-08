@@ -1,68 +1,64 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
-import marked from 'marked';
 
-marked.setOptions({
-	breaks: true
-});
-
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class ChatList extends React.Component {
-
 	componentDidUpdate() {
-		var listDOM = ReactDOM.findDOMNode(this.refs.list);
-		listDOM.scrollTop = listDOM.scrollHeight;
+		// NOTE: Scroll down the chat list
+		this.listNode.scrollTop = this.listNode.scrollHeight;
 	}
 
-	getMessageClass (message) {
+	get messageList() {
+		return this.props.messages.map((message) => {
+			return (
+				<CSSTransition key={message.id} timeout={600} classNames="chat-message">
+					<div className={this.getMessageClass(message)}>
+						{ message.type !== 'NOTICE' ? <div className="chat-message-user">{ message.name }</div> : ''}
+						<div className="chat-message-text">{ message.text }</div>
+					</div>
+				</CSSTransition>
+			);
+		});
+	}
+
+	getMessageClass(message) {
 		return classNames({
-			'chat-message': true,
+			'chat-message': message.type === 'MESSAGE',
+			'chat-message-notice': message.type === 'NOTICE',
 			'chat-message-my': this.props.userID === message.userID
 		});
 	}
 
-	get messageList () {
-		return this.props.messages.map(message => {
-			if (message.type === 'MESSAGE') {
-				return (
-					<div className={ this.getMessageClass(message) } key={ message.id }>
-						<div className="chat-message-user">
-							{ message.name }
-						</div>
-						<div className="chat-message-text" dangerouslySetInnerHTML={{ __html: marked(message.text) }} />
-					</div>
-				);
-			} else if (message.type === 'NOTICE') {
-				return (
-					<div className="chat-message-notice" key={ message.id }>
-						<div className="chat-message-text" dangerouslySetInnerHTML={{ __html: marked(message.text) }} />
-					</div>
-				);
-			}
-		});
-	}
-
-	render () {
+	render() {
 		return (
-			<ReactCSSTransitionGroup
-				ref="list"
-				component="div"
-				className="chat-list"
-				transitionName="chat-message"
-				transitionEnterTimeout={600}
-				transitionLeaveTimeout={600}
-			>
-				{ this.messageList }
-			</ReactCSSTransitionGroup>
+			<div className="chat-list" ref={node => this.listNode = node}>
+				<TransitionGroup>
+					{ this.messageList }
+				</TransitionGroup>
+			</div>
 		);
 	}
+
+	// <ReactCSSTransitionGroup
+	// 	ref="list"
+	// 	component="div"
+	// 	className="chat-list"
+	// 	transitionName="chat-message"
+	// 	transitionEnterTimeout={600}
+	// 	transitionLeaveTimeout={600}
+	// >
 }
 
 ChatList.propTypes = {
-	messages: React.PropTypes.array.isRequired,
-	userID: React.PropTypes.string.isRequired
+	messages: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.number,
+		text: PropTypes.string,
+		name: PropTypes.string,
+		type: PropTypes.string
+	})).isRequired,
+	userID: PropTypes.string.isRequired
 };
 
 export default ChatList;
