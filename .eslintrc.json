@@ -15,6 +15,7 @@
         "no-tabs": "off",
         "no-console": "off",
         "no-shadow": ["off"],
+        "no-unused-vars": ["warn"],
         "indent": ["warn", "tab"],
         "comma-dangle": ["error", "never"],
         "prefer-const": "off",

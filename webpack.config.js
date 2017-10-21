@@ -3,7 +3,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const IS_PROD = process.env.NODE_ENV === 'production';
+const PROD_ENV = process.env.NODE_ENV === 'production';
 const BUILD_DIR = path.resolve(__dirname, 'src/client/public');
 const APP_DIR = path.resolve(__dirname, 'src/client/app');
 const HASH_LENGTH = 8;
@@ -37,7 +37,7 @@ let babelLoader = {
 let fileLoader = {
 	loader: 'file-loader',
 	options: {
-		name: 'assets/[name].[ext]'
+		name: !PROD_ENV ? 'assets/[name].[ext]' : `assets/[name].[hash:${HASH_LENGTH}].[ext]`
 	}
 };
 
@@ -48,7 +48,7 @@ let config = {
 	output: {
 		path: BUILD_DIR,
 		publicPath: '/',
-		filename: 'js/[name].js'
+		filename: !PROD_ENV ? 'js/[name].js' : `js/[name].[chunkhash:${HASH_LENGTH}].js`
 	},
 	module: {
 		rules: [{
@@ -83,7 +83,7 @@ let config = {
 		// Avoid parsing pre-build scripts
 		// noParse: []
 	},
-	devtool: 'source-map',
+	devtool: PROD_ENV ? false : 'source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/client/index.tpl',
@@ -109,7 +109,7 @@ let config = {
 	}
 };
 
-if (IS_PROD) {
+if (PROD_ENV) {
 	config.plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false
@@ -118,19 +118,12 @@ if (IS_PROD) {
 			comments: false
 		}
 	}));
-	config.devtool = false;
-
-	config.output.filename = `js/[name].[chunkhash:${HASH_LENGTH}].js`;
-	fileLoader.options.name = `assets/[name].[hash:${HASH_LENGTH}].[ext]`;
 } else {
 	config.module.rules.push({
 		enforce: 'pre',
 		test: /\.js.?$/,
 		exclude: /node_modules/,
-		loader: 'eslint-loader',
-		options: {
-			fix: true
-		}
+		loader: 'eslint-loader'
 	});
 }
 
