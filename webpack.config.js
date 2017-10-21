@@ -25,22 +25,6 @@ let lessLoader = {
 	}
 };
 
-let babelLoader = {
-	loader: 'babel-loader',
-	options: {
-		presets: ['react', 'es2015'],
-		plugins: ['transform-runtime'],
-		cacheDirectory: true
-	}
-};
-
-let fileLoader = {
-	loader: 'file-loader',
-	options: {
-		name: !PROD_ENV ? 'assets/[name].[ext]' : `assets/[name].[hash:${HASH_LENGTH}].[ext]`
-	}
-};
-
 let config = {
 	entry: {
 		app: path.resolve(APP_DIR, 'index.jsx')
@@ -54,15 +38,19 @@ let config = {
 		rules: [{
 			test: /\.jsx?$/,
 			exclude: /(node_modules|app\/less)/,
-			use: [
-				babelLoader
-			]
+			loader: 'babel-loader',
+			options: {
+				presets: ['react', 'es2015'],
+				plugins: ['transform-runtime'],
+				cacheDirectory: true
+			}
 		}, {
 			test: /\.(eot|woff|woff2|ttf|svg|png|jpg).*?$/,
 			exclude: /app\/less/,
-			use: [
-				fileLoader
-			]
+			loader: 'file-loader',
+			options: {
+				name: !PROD_ENV ? 'assets/[name].[ext]' : `assets/[name].[hash:${HASH_LENGTH}].[ext]`
+			}
 		}, {
 			test: /\.css$/,
 			use: [
