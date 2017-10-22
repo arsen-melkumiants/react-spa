@@ -1,5 +1,5 @@
 node_modules/
-src/client/public/
+dist/
 cache/
 logs/
 mock/

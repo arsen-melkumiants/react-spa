@@ -18,27 +18,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../client/public'), { maxAge: MAX_AGE }));
+app.use(express.static(path.join(__dirname, '../../dist'), { maxAge: MAX_AGE }));
 
 app.use('/', index);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-	let e = new Error('Not found');
-	e.status = 404;
-	next(e);
+
+app.use((req, res) => {
+	res.status(404).send('Not found');
 });
 
-// error handlers
-app.use((e, req, res) => {
-	if (!e.status) {
-		console.error(e.stack || e);
-		res.status(500);
-		res.end('Internal server error');
-	} else {
-		res.status(e.status);
-		res.end(e.message);
-	}
+
+app.use((err, req, res) => {
+	console.error(err.stack || err);
+	res.status(500).send('Internal server error');
 });
 
 module.exports = app;

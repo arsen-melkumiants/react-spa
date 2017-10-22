@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const PROD_ENV = process.env.NODE_ENV === 'production';
-const BUILD_DIR = path.resolve(__dirname, 'src/client/public');
+const BUILD_DIR = path.resolve(__dirname, 'dist');
 const APP_DIR = path.resolve(__dirname, 'src/client/app');
 const HASH_LENGTH = 8;
 
@@ -74,7 +74,7 @@ let config = {
 	devtool: PROD_ENV ? false : 'source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: 'src/client/index.tpl',
+			template: 'src/client/index.html',
 			filename: 'index.html'
 		})
 	],
