@@ -10,8 +10,8 @@ const index = require('./routes/index');
 const app = express();
 require('./socket');
 
-// Note: currently set a day
-const MAX_AGE = 86400000;
+// NOTE: Cache time
+const MAX_AGE = '1y';
 
 app.use(compression());
 app.use(logger('dev'));

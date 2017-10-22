@@ -3,7 +3,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const PROD_ENV = process.env.NODE_ENV === 'production';
+const IS_PROD = process.env.NODE_ENV === 'production';
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 const APP_DIR = path.resolve(__dirname, 'src/client/app');
 const HASH_LENGTH = 8;
@@ -32,7 +32,7 @@ let config = {
 	output: {
 		path: BUILD_DIR,
 		publicPath: '/',
-		filename: !PROD_ENV ? 'js/[name].js' : `js/[name].[chunkhash:${HASH_LENGTH}].js`
+		filename: !IS_PROD ? 'js/[name].js' : `js/[name].[chunkhash:${HASH_LENGTH}].js`
 	},
 	module: {
 		rules: [{
@@ -49,7 +49,7 @@ let config = {
 			exclude: /app\/less/,
 			loader: 'file-loader',
 			options: {
-				name: !PROD_ENV ? 'assets/[name].[ext]' : `assets/[name].[hash:${HASH_LENGTH}].[ext]`
+				name: !IS_PROD ? 'assets/[name].[ext]' : `assets/[name].[hash:${HASH_LENGTH}].[ext]`
 			}
 		}, {
 			test: /\.css$/,
@@ -71,7 +71,7 @@ let config = {
 		// Avoid parsing pre-build scripts
 		// noParse: []
 	},
-	devtool: PROD_ENV ? false : 'source-map',
+	devtool: IS_PROD ? false : 'source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: 'src/client/index.html',
@@ -97,7 +97,7 @@ let config = {
 	}
 };
 
-if (PROD_ENV) {
+if (IS_PROD) {
 	config.plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 			warnings: false

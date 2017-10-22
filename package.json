@@ -10,10 +10,13 @@
     "url": "https://github.com/arsen-melkumiants/react-spa.git"
   },
   "scripts": {
-    "start": "./node_modules/pm2/bin/pm2 start process.json",
-    "build": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js",
-    "watch": "./node_modules/webpack/bin/webpack.js -w",
-    "stop": "./node_modules/pm2/bin/pm2 kill"
+    "start": "./node_modules/.bin/pm2 startOrRestart process.config.js",
+    "start:prod": "NODE_ENV=production ./node_modules/.bin/pm2 startOrRestart process.config.js",
+    "stop": "./node_modules/.bin/pm2 kill",
+    "log": "./node_modules/.bin/pm2 log",
+    "build": "./node_modules/.bin/webpack",
+    "build:prod": "NODE_ENV=production ./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack -w"
   },
   "moduleRoots": [
     "node_modules",
@@ -50,11 +53,11 @@
     "babel-preset-react": "6.24.1",
     "babel-runtime": "6.26.0",
     "css-loader": "0.28.7",
-    "eslint": "4.8.0",
-    "eslint-config-airbnb": "16.0.0",
+    "eslint": "4.9.0",
+    "eslint-config-airbnb": "16.1.0",
     "eslint-import-resolver-webpack": "0.8.3",
     "eslint-loader": "1.9.0",
-    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "7.4.0",
     "file-loader": "1.1.5",
