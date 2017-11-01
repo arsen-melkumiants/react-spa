@@ -40,15 +40,6 @@ class ChatList extends React.Component {
 			</div>
 		);
 	}
-
-	// <ReactCSSTransitionGroup
-	// 	ref="list"
-	// 	component="div"
-	// 	className="chat-list"
-	// 	transitionName="chat-message"
-	// 	transitionEnterTimeout={600}
-	// 	transitionLeaveTimeout={600}
-	// >
 }
 
 ChatList.propTypes = {
