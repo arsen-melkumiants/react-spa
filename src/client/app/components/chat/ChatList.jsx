@@ -13,10 +13,17 @@ class ChatList extends React.Component {
 	get messageList() {
 		return this.props.messages.map((message) => {
 			return (
-				<CSSTransition key={message.id} timeout={600} classNames="chat-message">
+				<CSSTransition
+					key={message.id}
+					timeout={600}
+					classNames={{
+						enter: 'b_chat__item--enter',
+						enterActive: 'b_chat__item--enter_active'
+					}}
+				>
 					<div className={this.getMessageClass(message)}>
-						{ message.type !== 'NOTICE' ? <div className="chat-message-user">{ message.name }</div> : ''}
-						<div className="chat-message-text">{ message.text }</div>
+						{ message.type !== 'NOTICE' ? <div className="b_chat__user">{ message.name }</div> : '' }
+						<div className="b_chat__text">{ message.text }</div>
 					</div>
 				</CSSTransition>
 			);
@@ -24,16 +31,16 @@ class ChatList extends React.Component {
 	}
 
 	getMessageClass(message) {
-		return classNames({
-			'chat-message': message.type === 'MESSAGE',
-			'chat-message-notice': message.type === 'NOTICE',
-			'chat-message-my': this.props.userID === message.userID
+		return classNames('b_chat__item', {
+			'b_chat__item--message': message.type === 'MESSAGE',
+			'b_chat__item--notice': message.type === 'NOTICE',
+			'b_chat__item--my': this.props.userID === message.userID
 		});
 	}
 
 	render() {
 		return (
-			<div className="chat-list" ref={node => this.listNode = node}>
+			<div className="b_chat__list" ref={node => this.listNode = node}>
 				<TransitionGroup>
 					{ this.messageList }
 				</TransitionGroup>

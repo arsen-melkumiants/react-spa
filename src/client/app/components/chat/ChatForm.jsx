@@ -14,7 +14,7 @@ class ChatForm extends React.Component {
 		};
 
 		this.onNameSubmit = this.onNameSubmit.bind(this);
-		this.onMessageSubmit = this.onMessageSubmit.bind(this);
+		this.onTextSubmit = this.onTextSubmit.bind(this);
 	}
 
 	onNameSubmit(name) {
@@ -22,7 +22,7 @@ class ChatForm extends React.Component {
 		storage.set('name', name);
 	}
 
-	onMessageSubmit(text) {
+	onTextSubmit(text) {
 		this.props.onMessageSubmit({
 			name: this.state.name,
 			text
@@ -31,7 +31,7 @@ class ChatForm extends React.Component {
 
 	get inputElements() {
 		if (this.state.name) {
-			return (<FormText onMessageSubmit={this.onMessageSubmit} />);
+			return (<FormText onTextSubmit={this.onTextSubmit} />);
 		}
 
 		return (<FormName onNameSubmit={this.onNameSubmit} />);
@@ -39,7 +39,7 @@ class ChatForm extends React.Component {
 
 	render() {
 		return (
-			<div className="chat-form">
+			<div className="b_chat__form">
 				{ this.inputElements }
 			</div>
 		);

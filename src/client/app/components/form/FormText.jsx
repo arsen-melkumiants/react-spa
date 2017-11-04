@@ -13,8 +13,8 @@ class FormText extends React.Component {
 		};
 
 		this.onKeyDown = this.onKeyDown.bind(this);
-		this.onMessageSubmit = this.onMessageSubmit.bind(this);
-		this.onMessageChange = this.onMessageChange.bind(this);
+		this.onTextSubmit = this.onTextSubmit.bind(this);
+		this.onTextChange = this.onTextChange.bind(this);
 	}
 
 	componentDidMount() {
@@ -23,11 +23,11 @@ class FormText extends React.Component {
 
 	onKeyDown(e) {
 		if (e.ctrlKey && (e.keyCode === 10 || e.keyCode === 13)) {
-			this.onMessageSubmit(e);
+			this.onTextSubmit(e);
 		}
 	}
 
-	onMessageChange(e) {
+	onTextChange(e) {
 		this.setState({
 			// NOTE: Do not trim on text because user can use line breaks
 			text: e.target.value,
@@ -35,14 +35,14 @@ class FormText extends React.Component {
 		});
 	}
 
-	onMessageSubmit(e) {
+	onTextSubmit(e) {
 		e.preventDefault();
 		let text = this.state.text.trim();
 		if (!text) {
 			return;
 		}
 
-		this.props.onMessageSubmit(text);
+		this.props.onTextSubmit(text);
 		this.setState({
 			text: '',
 			btnStatus: false
@@ -59,7 +59,7 @@ class FormText extends React.Component {
 
 	render() {
 		return (
-			<form className="form" onSubmit={this.onMessageSubmit}>
+			<form className="form" onSubmit={this.onTextSubmit}>
 				<div className="form-text">
 					<div className="form-text-inner">
 						<textarea
@@ -67,7 +67,7 @@ class FormText extends React.Component {
 							value={this.state.text}
 							placeholder="Say something..."
 							onKeyDown={this.onKeyDown}
-							onChange={this.onMessageChange}
+							onChange={this.onTextChange}
 						/>
 					</div>
 				</div>
@@ -80,7 +80,7 @@ class FormText extends React.Component {
 }
 
 FormText.propTypes = {
-	onMessageSubmit: PropTypes.func.isRequired
+	onTextSubmit: PropTypes.func.isRequired
 };
 
 export default FormText;

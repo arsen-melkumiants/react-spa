@@ -59,7 +59,7 @@ class ChatBox extends React.Component {
 
 	render() {
 		return (
-			<div className="chat-box">
+			<div className="b_chat">
 				<ChatList
 					messages={this.state.messages}
 					userID={this.state.userID}

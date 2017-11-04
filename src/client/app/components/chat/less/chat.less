@@ -1,12 +1,10 @@
 @import 'variables.less';
 
-.chat {
+.b_chat {
+	padding: 10px;
+	overflow: hidden;
 
-	&-box {
-		padding: 10px;
-		overflow: hidden;
-	}
-	&-list {
+	&__list {
 		overflow-y: scroll;
 		overflow-x: hidden;
 		margin-right: -26px;
@@ -19,56 +17,64 @@
 			clear: both;
 		}
 	}
-	&-form {
+
+	&__form {
 		margin-top: 20px;
 	}
-	&-message {
+
+	&__item {
 		overflow: hidden;
-		background: @color-message-bg;
-		color: @color-message-text;
-		width: 60%;
-		float: left;
 		padding: 10px;
-		margin-bottom: 15px;
 		border-radius: @border-radius;
 
-		&-text {
-			white-space: pre;
+		&--message {
+			width: 60%;
+			margin-bottom: 15px;
+			float: left;
+			background: @color-message-bg;
+			color: @color-message-text;
 		}
-		&-my {
-			float: right;
-			background: @color-main;
-			color: @color-bg;
-		}
-		&-user {
-			font-weight: bold;
-			margin-bottom: 5px;
-		}
-		&-notice {
+
+		&--notice {
 			width: 80%;
 			margin: 0 auto;
-			clear: both;
-			padding: 10px;
 			margin-bottom: 10px;
+			clear: both;
 			color: darken(@color-message-bg, 10%);
 			text-align: center;
 			font-style: italic;
 		}
-		&-enter {
+
+		&--my {
+			float: right;
+			background: @color-main;
+			color: @color-bg;
+		}
+
+		&--enter {
 			opacity: 0.01;
 
-			&&-active {
+			&_active {
 				opacity: 1;
 				transition: opacity .5s ease-in;
 			}
 		}
-		&-leave {
+		&--leave {
 			opacity: 1;
 
-			&&-active {
+			&_active {
 				opacity: 0.01;
 				transition: opacity .3s ease-in;
 			}
 		}
+	}
+
+	&__text {
+		white-space: pre;
+	}
+
+	&__user {
+		font-weight: bold;
+		margin-bottom: 5px;
 	}
 }

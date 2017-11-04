@@ -88,7 +88,7 @@ let config = {
 
 		// Using pre-build libs to make build process faster
 		alias: {
-			react: 'react/umd/react.production.min.js',
+			react: IS_PROD ? 'react/umd/react.production.min.js' : 'react/umd/react.development.js',
 			'prop-types': 'prop-types/prop-types.min.js',
 			'react-dom': 'react-dom/umd/react-dom.production.min.js',
 			'react-router-dom': 'react-router-dom/umd/react-router-dom.min.js',
