@@ -16,8 +16,11 @@ import './less/main.less';
 
 const App = (
 	<Router>
-		<div>
-			<NavBox>
+		<div className="b_page">
+			<div className="b_page__navigation">
+				<NavBox />
+			</div>
+			<div className="b_page__container content container">
 				<Switch>
 					<Route exact path="/" component={ChatBox} />
 					<Route path="/chat" component={ChatBox} />
@@ -26,7 +29,7 @@ const App = (
 
 					<Route component={NotFound} />
 				</Switch>
-			</NavBox>
+			</div>
 		</div>
 	</Router>
 );

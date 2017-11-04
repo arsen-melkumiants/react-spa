@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 function NavItem({ to, exact, children }) {
 	return (
-		<li className="nav-list-item">
+		<li className="b_navigation__item">
 			<NavLink
 				exact={exact}
 				to={to}
-				className="nav-list-link"
-				activeClassName="nav-list-link-active"
+				className="b_navigation__link"
+				activeClassName="b_navigation__link--active"
 			>
 				{ children }
 			</NavLink>
