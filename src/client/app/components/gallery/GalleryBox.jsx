@@ -53,7 +53,7 @@ class GalleryBox extends React.Component {
 
 	render() {
 		return (
-			<div className="gallery-box block" style={{ maxWidth: this.state.width }}>
+			<div className="b_gallery" style={{ width: this.state.width, height: this.state.height }}>
 				<GalleryNav onChangeImage={this.onChangeImage} />
 				<GalleryList
 					images={this.state.images}

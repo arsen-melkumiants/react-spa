@@ -75,18 +75,18 @@ class SettingsBox extends React.Component {
 					</div>
 					<div className="settings-body settings-body-photo">
 						<FormRange
-							min={250}
+							min={300}
 							max={500}
 							value={this.state.width}
 							label={`Width: ${this.state.width}px`}
-							onRangeChange={value => this.onWidthChange(value)}
+							onRangeChange={this.onWidthChange}
 						/>
 						<FormRange
-							min={100}
+							min={200}
 							max={500}
 							value={this.state.height}
 							label={`Height: ${this.state.height}px`}
-							onRangeChange={value => this.onHeightChange(value)}
+							onRangeChange={this.onHeightChange}
 						/>
 					</div>
 				</div>

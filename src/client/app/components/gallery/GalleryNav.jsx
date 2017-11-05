@@ -23,30 +23,30 @@ function GalleryNav({ onChangeImage }) {
 	return (
 		<Swipeable
 			tabIndex={0}
-			className="gallery-nav"
+			className="b_gallery__navigation"
 			onSwipedLeft={onNextSlide}
 			onSwipedRight={onPrevSlide}
 			onKeyDown={onKeySlide}
 		>
 			<div
 				role="presentation"
-				className="gallery-next-area"
-				onClick={onNextSlide}
-				onKeyDown={onNextSlide}
-			>
-				<div className="gallery-arrow">
-					<i className="material-icons">&#xE315;</i>
-				</div>
-			</div>
-			<div
-				role="presentation"
-				className="gallery-prev-area"
+				className="b_gallery__prev_area"
 				onClick={onPrevSlide}
 				onKeyDown={onPrevSlide}
 			>
-				<div className="gallery-arrow">
-					<i className="material-icons">&#xE314;</i>
-				</div>
+
+				<i className="b_gallery__arrow_icon material-icons">&#xE314;</i>
+
+			</div>
+			<div
+				role="presentation"
+				className="b_gallery__next_area"
+				onClick={onNextSlide}
+				onKeyDown={onNextSlide}
+			>
+
+				<i className="b_gallery__arrow_icon material-icons">&#xE315;</i>
+
 			</div>
 		</Swipeable>
 	);

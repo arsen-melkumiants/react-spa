@@ -21,6 +21,7 @@
 		"prefer-const": "off",
 		"spaced-comment": ["warn"],
 		"no-use-before-define": ["error", { "functions": false }],
+		"object-curly-newline": ["warn", { "minProperties": 6, "consistent": true }],
 		"no-return-assign": "off",
 		"jsx-a11y/label-has-for": "off",
 		"arrow-body-style": "off",

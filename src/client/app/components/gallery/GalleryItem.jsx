@@ -12,7 +12,7 @@ class GalleryItem extends React.Component {
 			loaded: false
 		};
 
-		this.onImageLoad = this.onImageLoad.bind(this);
+		this.onImageLoaded = this.onImageLoaded.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -21,21 +21,19 @@ class GalleryItem extends React.Component {
 		});
 	}
 
-	onImageLoad() {
+	onImageLoaded() {
 		this.setState({ loaded: true });
 	}
 
 	get itemClass() {
-		return classNames({
-			'gallery-item': true,
-			'gallery-item-active': this.props.active === this.state.image.id
+		return classNames('b_gallery__item', {
+			'b_gallery__item--active': this.props.active === this.state.image.id
 		});
 	}
 
 	get imageClass() {
-		return classNames({
-			'gallery-image': true,
-			'gallery-image-loaded': this.state.loaded
+		return classNames('b_gallery__image', {
+			'b_gallery__image--loaded': this.state.loaded
 		});
 	}
 
@@ -46,7 +44,7 @@ class GalleryItem extends React.Component {
 				<img
 					alt=""
 					className={this.imageClass}
-					onLoad={this.onImageLoad}
+					onLoad={this.onImageLoaded}
 					src={this.state.image.src}
 				/>
 			</div>

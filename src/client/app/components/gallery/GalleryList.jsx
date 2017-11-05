@@ -18,7 +18,7 @@ function GalleryList({ images, active }) {
 	};
 
 	return (
-		<div className="gallery-list" style={{ transform: getTransformStyle() }}>
+		<div className="b_gallery__list" style={{ transform: getTransformStyle() }}>
 			{ images.map(image => (
 				<GalleryItem image={image} active={getStatus(image)} key={image.id} />
 			))}
