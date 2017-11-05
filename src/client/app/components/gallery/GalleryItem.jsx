@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import PreLoaderSpinner from 'preloader/PreLoaderSpinner';
+import PreLoader from 'preloader/PreLoader';
 
 class GalleryItem extends React.Component {
 	constructor(props) {
@@ -40,7 +40,7 @@ class GalleryItem extends React.Component {
 	render() {
 		return (
 			<div className={this.itemClass}>
-				<PreLoaderSpinner show={!this.state.loaded} />
+				<PreLoader show={!this.state.loaded} />
 				<img
 					alt=""
 					className={this.imageClass}
