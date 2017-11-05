@@ -4,18 +4,17 @@
 	padding: 10px;
 	overflow: hidden;
 
-	&__list {
+	&__scrole {
 		overflow-y: scroll;
 		overflow-x: hidden;
 		margin-right: -26px;
 		padding-right: 17px;
 		height: 300px;
+	}
 
-		&:after {
-			content: " ";
-			display: table;
-			clear: both;
-		}
+	&__list {
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__form {
@@ -23,14 +22,13 @@
 	}
 
 	&__item {
-		overflow: hidden;
 		padding: 10px;
 		border-radius: @border-radius;
 
 		&--message {
 			width: 60%;
 			margin-bottom: 15px;
-			float: left;
+			align-self: flex-start;
 			background: @color-message-bg;
 			color: @color-message-text;
 		}
@@ -39,14 +37,13 @@
 			width: 80%;
 			margin: 0 auto;
 			margin-bottom: 10px;
-			clear: both;
 			color: darken(@color-message-bg, 10%);
 			text-align: center;
 			font-style: italic;
 		}
 
 		&--my {
-			float: right;
+			align-self: flex-end;
 			background: @color-main;
 			color: @color-bg;
 		}
