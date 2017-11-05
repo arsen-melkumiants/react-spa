@@ -53,27 +53,26 @@ class SettingsBox extends React.Component {
 	}
 
 	getItemClass(item) {
-		return classNames({
-			'settings-item': true,
-			'settings-item-active': item === this.state.selectedItem
+		return classNames('b_settings__item', {
+			'b_settings__item--active': item === this.state.selectedItem
 		});
 	}
 
 	render() {
 		return (
-			<div className="settings-box">
+			<div className="b_settings">
 				<div className={this.getItemClass('PHOTO')}>
 					<div
 						tabIndex={0}
 						role="button"
-						className="settings-title"
+						className="b_settings__title"
 						onClick={() => this.onAccordionSelect('PHOTO')}
 						onKeyDown={() => this.onAccordionSelect('PHOTO')}
 					>
-						<i className="material-icons">&#xE315;</i>
+						<i className="b_settings__fold_icon material-icons">&#xE315;</i>
 						Photo settings
 					</div>
-					<div className="settings-body settings-body-photo">
+					<div className="b_settings__body b_settings__body--photo">
 						<FormRange
 							min={300}
 							max={500}
@@ -94,14 +93,14 @@ class SettingsBox extends React.Component {
 					<div
 						tabIndex={0}
 						role="button"
-						className="settings-title"
+						className="b_settings__title"
 						onClick={() => this.onAccordionSelect('CHAT')}
 						onKeyDown={() => this.onAccordionSelect('CHAT')}
 					>
-						<i className="material-icons">&#xE315;</i>
+						<i className="b_settings__fold_icon material-icons">&#xE315;</i>
 						Chat settings
 					</div>
-					<div className="settings-body settings-body-chat">
+					<div className="b_settings__body b_settings__body--chat">
 						<FormName name={this.state.name} onNameSubmit={this.onNameSubmit} />
 					</div>
 				</div>

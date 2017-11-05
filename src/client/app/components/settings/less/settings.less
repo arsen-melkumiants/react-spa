@@ -1,50 +1,48 @@
 @import 'variables.less';
 
-.settings {
+.b_settings {
+	padding: 10px;
 
-	&-box {
-		padding: 10px;
-	}
-	&-item {
-		&-active {
-			.settings {
-				&-title	{
-					i {
-						transform: rotate(90deg);
-					}
+	&__item {
+		&--active {
+			.b_settings {
+				&__fold_icon{
+					transform: rotate(90deg);
 				}
-				&-body {
-					&-photo {
+				&__body {
+					&--photo {
 						height: 150px;
 					}
-					&-chat {
+					&--chat {
 						height: 50px;
 					}
 				}
 			}
 		}
 	}
-	&-title {
+
+	&__title {
 		font-size: 24px;
 		cursor: pointer;
 		user-select: none;
 		margin-bottom: 15px;
-
-		i {
-			position: relative;
-		    top: 8px;
-			font-size: 30px;
-			height: 30px;
-			width: 30px;
-
-			transition: transform .15s linear;
-		}
+		outline: none;
 	}
-	&-body {
+
+	&__fold_icon,
+	&__fold_icon.material-icons {
+		position: relative;
+		top: 8px;
+		font-size: 30px;
+		height: 30px;
+		width: 30px;
+		transition: transform .15s linear;
+	}
+	&__body {
 		height: 0;
 		overflow: hidden;
 		padding: 0 10px;
-
 		transition: height .15s linear;
 	}
+
 }
