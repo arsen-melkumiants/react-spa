@@ -40,7 +40,7 @@ class ChatList extends React.Component {
 
 	render() {
 		return (
-			<div className="b_chat__scrole" ref={node => this.listNode = node}>
+			<div className="b_chat__scroll" ref={node => this.listNode = node}>
 				<TransitionGroup className="b_chat__list">
 					{ this.messageList }
 				</TransitionGroup>

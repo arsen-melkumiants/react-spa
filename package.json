@@ -14,9 +14,9 @@
     "start:prod": "NODE_ENV=production ./node_modules/.bin/pm2 startOrRestart process.config.js",
     "stop": "./node_modules/.bin/pm2 kill",
     "log": "./node_modules/.bin/pm2 log",
-    "build": "./node_modules/.bin/webpack",
-    "build:prod": "NODE_ENV=production ./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack -w"
+    "build": "./node_modules/.bin/webpack --progress",
+    "build:prod": "NODE_ENV=production ./node_modules/.bin/webpack --progress",
+    "watch": "./node_modules/.bin/webpack --watch --progress"
   },
   "moduleRoots": [
     "node_modules",

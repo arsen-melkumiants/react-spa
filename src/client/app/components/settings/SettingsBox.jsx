@@ -72,7 +72,7 @@ class SettingsBox extends React.Component {
 						<i className="b_settings__fold_icon material-icons">&#xE315;</i>
 						Photo settings
 					</div>
-					<div className="b_settings__body b_settings__body--photo">
+					<div className="b_settings__content b_settings__content--photo">
 						<FormRange
 							min={300}
 							max={500}
@@ -100,7 +100,7 @@ class SettingsBox extends React.Component {
 						<i className="b_settings__fold_icon material-icons">&#xE315;</i>
 						Chat settings
 					</div>
-					<div className="b_settings__body b_settings__body--chat">
+					<div className="b_settings__content b_settings__content--chat">
 						<FormName name={this.state.name} onNameSubmit={this.onNameSubmit} />
 					</div>
 				</div>
